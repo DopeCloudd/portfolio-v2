@@ -59,6 +59,7 @@ export function Footer() {
       </div>
       <div className="border-t border-white/5 py-6 text-center text-xs text-white/50">
         © {new Date().getFullYear()} Valentin LEROUGE — Tous droits réservés.
+        Fait avec ❤️ à Montpellier.
       </div>
     </footer>
   );
