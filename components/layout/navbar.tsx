@@ -1,9 +1,9 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
+import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 const links = [
   { href: "#accueil", label: "Accueil" },
   { href: "#services", label: "Services" },
+  { href: "#offres", label: "Offres" },
   { href: "#projets", label: "Projets" },
   { href: "#temoignages", label: "Témoignages" },
   { href: "#avis", label: "Avis" },
@@ -23,17 +24,28 @@ export function Navbar() {
 
   useEffect(() => {
     const handler = () => {
-      const offsets = links.map(({ href }) => {
-        const id = href.replace("#", "");
-        const element = document.getElementById(id);
-        if (!element) return { href, offset: Number.POSITIVE_INFINITY };
-        const rect = element.getBoundingClientRect();
-        return { href, offset: Math.abs(rect.top - 120) };
-      });
+      const referenceOffset = 200;
+      const scrollPosition = window.scrollY + referenceOffset;
 
-      const current = offsets.reduce((prev, curr) =>
-        curr.offset < prev.offset ? curr : prev
-      );
+      const sections = links
+        .map(({ href }) => {
+          const id = href.replace("#", "");
+          const element = document.getElementById(id);
+          if (!element) return null;
+          const top = element.getBoundingClientRect().top + window.scrollY;
+          return { href, top };
+        })
+        .filter(
+          (section): section is { href: string; top: number } => Boolean(section)
+        )
+        .sort((a, b) => a.top - b.top);
+
+      if (sections.length === 0) return;
+
+      const current =
+        [...sections].reverse().find((section) => section.top <= scrollPosition) ??
+        sections[0];
+
       setActive(current.href);
     };
 
@@ -56,10 +68,13 @@ export function Navbar() {
   }, []);
 
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
-  const handleMenuLinkClick = () => setIsMenuOpen(false);
+  const handleMenuLinkClick = (href: string) => () => {
+    setIsMenuOpen(false);
+    setActive(href);
+  };
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 backdrop-blur-xl">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#020818]/70 backdrop-blur-lg">
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4">
         <Link
           href="#accueil"
@@ -79,7 +94,7 @@ export function Navbar() {
           </span>
         </Link>
         <div className="flex items-center gap-3">
-          <nav className="hidden items-center gap-1 rounded-full border border-white/10 bg-white/5 px-2 py-1 text-xs font-medium text-white/80 shadow-lg shadow-black/20 md:flex">
+          <nav className="hidden items-center gap-1 rounded-full border border-white/15 bg-white/[0.08] px-2 py-1 text-xs font-medium text-white/80 shadow-lg shadow-black/30 backdrop-blur-xl md:flex">
             {links.map(({ href, label }) => (
               <Link
                 key={href}
@@ -91,11 +106,12 @@ export function Navbar() {
                     : "text-white/70 hover:text-white"
                 )}
                 aria-label={`Aller à la section ${label}`}
+                onClick={() => setActive(href)}
               >
                 {active === href && (
                   <motion.span
                     layoutId="nav-active"
-                    className="absolute inset-0 rounded-full bg-white/15"
+                    className="absolute inset-0 rounded-full bg-white/20"
                     transition={{
                       type: "spring",
                       stiffness: 380,
@@ -107,13 +123,23 @@ export function Navbar() {
               </Link>
             ))}
           </nav>
-          <Button asChild className="hidden md:inline-flex">
-            <Link href="#contact">Vous avez un projet ?</Link>
+          <Button asChild className="hidden shadow-lg shadow-sky-500/30 md:inline-flex">
+            <Link
+              href="https://calendly.com/welance-mail/parlez-nous-de-votre-projet"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Réserver un appel de 15 min
+            </Link>
           </Button>
           <div className="flex items-center gap-2 md:hidden">
-            <Button asChild size="sm" variant="secondary">
-              <Link href="#contact" onClick={handleMenuLinkClick}>
-                Contact
+            <Button asChild size="sm" variant="secondary" className="shadow-lg shadow-sky-500/30">
+              <Link
+                href="https://calendly.com/welance-mail/parlez-nous-de-votre-projet"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Réserver un appel de 15 min
               </Link>
             </Button>
             <Button
@@ -124,7 +150,7 @@ export function Navbar() {
               aria-controls="mobile-navigation"
               aria-label="Basculer le menu de navigation"
               onClick={toggleMenu}
-              className="rounded-full border border-white/10 bg-white/10 text-white/80 hover:text-white"
+              className="rounded-full border border-white/15 bg-white/[0.08] text-white/80 shadow-lg shadow-black/30 backdrop-blur-xl hover:text-white"
             >
               {isMenuOpen ? (
                 <X className="h-5 w-5" aria-hidden="true" />
@@ -147,12 +173,12 @@ export function Navbar() {
             className="md:hidden"
           >
             <div className="mx-auto mt-2 w-full max-w-6xl px-6 pb-4">
-              <div className="flex flex-col gap-1 rounded-3xl border border-white/10 bg-white/5 p-3 text-sm font-medium text-white/80 shadow-lg shadow-black/20">
+              <div className="flex flex-col gap-1 rounded-3xl border border-white/15 bg-white/[0.08] p-3 text-sm font-medium text-white/80 shadow-lg shadow-black/30 backdrop-blur-xl">
                 {links.map(({ href, label }) => (
                   <Link
                     key={href}
                     href={href}
-                    onClick={handleMenuLinkClick}
+                    onClick={handleMenuLinkClick(href)}
                     className={cn(
                       "flex items-center justify-between rounded-2xl px-4 py-2 transition",
                       active === href

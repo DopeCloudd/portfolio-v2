@@ -1,15 +1,16 @@
 import { promises as fs } from "fs";
-import { join } from "path";
 import Script from "next/script";
+import { join } from "path";
 
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
-import { HeroSection } from "@/components/sections/hero";
-import { ServicesSection } from "@/components/sections/services";
-import { ProjectsSection } from "@/components/sections/projects";
-import { TestimonialsSection } from "@/components/sections/testimonials";
-import { ReviewsSection } from "@/components/sections/reviews";
 import { ContactSection } from "@/components/sections/contact";
+import { HeroSection } from "@/components/sections/hero";
+import { OffersSection } from "@/components/sections/offers";
+import { ProjectsSection } from "@/components/sections/projects";
+import { ReviewsSection } from "@/components/sections/reviews";
+import { ServicesSection } from "@/components/sections/services";
+import { TestimonialsSection } from "@/components/sections/testimonials";
 import { reviewStorageSchema, type StoredReview } from "@/lib/validation";
 
 async function getReviews() {
@@ -22,7 +23,8 @@ async function getReviews() {
       reviews.length > 0
         ? Number(
             (
-              reviews.reduce((acc, item) => acc + item.rating, 0) / reviews.length
+              reviews.reduce((acc, item) => acc + item.rating, 0) /
+              reviews.length
             ).toFixed(1)
           )
         : 0;
@@ -41,16 +43,16 @@ export default async function HomePage() {
     "@type": "Person",
     name: "Valentin LEROUGE",
     jobTitle: "Développeur web freelance",
-    url: "https://freelance-web.dev",
+    url: "https://valentin-lerouge.fr",
     sameAs: [
-      "https://www.linkedin.com/in/guillaume-martin-dev",
-      "https://github.com/guillaumemartin"
+      "https://www.linkedin.com/in/valentin-lerouge-freelance/",
+      "https://github.com/DopeCloudd",
     ],
     knowsAbout: ["React", "Symfony", "WordPress", "Automatisation", "Scraping"],
     worksFor: {
       "@type": "Organization",
-      name: "Indépendant"
-    }
+      name: "Indépendant",
+    },
   };
 
   const breadcrumbsSchema = {
@@ -61,27 +63,33 @@ export default async function HomePage() {
         "@type": "ListItem",
         position: 1,
         name: "Accueil",
-        item: "https://freelance-web.dev/#accueil"
+        item: "https://valentin-lerouge.fr/#accueil",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Services",
-        item: "https://freelance-web.dev/#services"
+        item: "https://valentin-lerouge.fr/#services",
       },
       {
         "@type": "ListItem",
         position: 3,
-        name: "Projets",
-        item: "https://freelance-web.dev/#projets"
+        name: "Offres",
+        item: "https://valentin-lerouge.fr/#offres",
       },
       {
         "@type": "ListItem",
         position: 4,
+        name: "Projets",
+        item: "https://valentin-lerouge.fr/#projets",
+      },
+      {
+        "@type": "ListItem",
+        position: 5,
         name: "Contact",
-        item: "https://freelance-web.dev/#contact"
-      }
-    ]
+        item: "https://valentin-lerouge.fr/#contact",
+      },
+    ],
   };
 
   return (
@@ -100,6 +108,7 @@ export default async function HomePage() {
       <main className="flex flex-col">
         <HeroSection />
         <ServicesSection />
+        <OffersSection />
         <ProjectsSection />
         <TestimonialsSection />
         <ReviewsSection

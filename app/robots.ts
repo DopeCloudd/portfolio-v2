@@ -1,13 +1,13 @@
 import type { MetadataRoute } from "next";
 
-const baseUrl = "https://freelance-web.dev";
+const baseUrl = "https://valentin-lerouge.fr";
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: "*",
-      allow: "/"
+      allow: "/",
     },
-    sitemap: `${baseUrl}/sitemap.xml`
+    sitemap: `${baseUrl}/sitemap.xml`,
   };
 }

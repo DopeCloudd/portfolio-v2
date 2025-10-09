@@ -12,23 +12,19 @@ export function ContactSection() {
       title="Vous avez un projet ? Parlons-en"
       description="Expliquez votre besoin : je reviens vers vous sous 24h ouvrées avec une première analyse et une proposition de créneau."
       align="left"
+      variant="surface"
     >
       <div className="grid gap-10 lg:grid-cols-[1fr_1fr]">
-        <Card className="bg-white/5 p-8">
+        <Card className="border-white/15 bg-white/[0.06] p-8 backdrop-blur-xl">
           <h3 className="text-2xl font-semibold text-white">
             Discutons de votre besoin
           </h3>
-          <p className="mt-3 text-sm text-white/70">
-            Décrivez votre projet, vos objectifs business et vos contraintes
-            techniques. Trois points abordés lors du premier échange : vision,
-            priorités, budget.
-          </p>
           <div className="mt-6">
             <ContactForm />
           </div>
         </Card>
         <div className="space-y-6">
-          <Card className="bg-white/5 p-6">
+          <Card className="border-white/15 bg-white/[0.06] p-6 backdrop-blur-xl">
             <h4 className="text-lg font-semibold text-white">
               Informations directes
             </h4>
@@ -59,7 +55,7 @@ export function ContactSection() {
               </li>
             </ul>
           </Card>
-          <Card className="bg-white/5 p-6">
+          <Card className="border-white/15 bg-white/[0.06] p-6 backdrop-blur-xl">
             <h4 className="text-lg font-semibold text-white">
               Process d’onboarding
             </h4>
@@ -76,8 +72,12 @@ export function ContactSection() {
             </ol>
             <div className="mt-6">
               <Button asChild variant="secondary">
-                <a href="mailto:contact@valentin-lerouge.fr">
-                  Programmer un échange
+                <a
+                  href="https://calendly.com/welance-mail/parlez-nous-de-votre-projet"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Réserver un appel de 15 min
                 </a>
               </Button>
             </div>

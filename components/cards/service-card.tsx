@@ -28,7 +28,7 @@ export function ServiceCard({ title, description, icon, index = 0 }: ServiceCard
       transition={{ duration: 0.4 }}
       className="h-full"
     >
-      <Card className="h-full bg-white/[0.04] backdrop-blur">
+      <Card className="h-full border-white/15 bg-white/[0.06] backdrop-blur-xl">
         <CardHeader className="flex-row items-start gap-4">
           <span
             className={`flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${gradient} text-white shadow-lg shadow-black/10`}

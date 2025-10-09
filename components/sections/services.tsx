@@ -49,6 +49,7 @@ export function ServicesSection() {
       eyebrow="Services"
       title="Des solutions web taillées pour les TPE & PME"
       description="Je construis des expériences numériques fiables et performantes, de la vitrine WordPress aux applications métier sur-mesure."
+      variant="surface"
     >
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
         {services.map((service, index) => (

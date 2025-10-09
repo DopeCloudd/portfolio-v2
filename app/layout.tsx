@@ -7,15 +7,16 @@ import "./globals.css";
 
 const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-sans"
+  variable: "--font-sans",
 });
 
 const jetBrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-mono"
+  variable: "--font-mono",
 });
 
-const title = "Développeur web freelance — sites modernes, performants et évolutifs";
+const title =
+  "Développeur web freelance — sites modernes, performants et évolutifs";
 const description =
   "Freelance spécialisé en React, Symfony et WordPress. J’aide les entreprises à créer des sites rapides, fiables et orientés résultats.";
 
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
   title,
   description,
   applicationName: "Portfolio — Valentin LEROUGE",
-  metadataBase: new URL("https://freelance-web.dev"),
+  metadataBase: new URL("https://valentin-lerouge.fr"),
   keywords: [
     "développeur freelance",
     "React",
@@ -32,34 +33,34 @@ export const metadata: Metadata = {
     "Next.js",
     "création site vitrine",
     "automatisation",
-    "scraping"
+    "scraping",
   ],
   openGraph: {
     title,
     description,
     type: "website",
-    locale: "fr_FR"
+    locale: "fr_FR",
   },
   twitter: {
     card: "summary_large_image",
     title,
-    description
+    description,
   },
   robots: {
     index: true,
-    follow: true
-  }
+    follow: true,
+  },
 };
 
 export default function RootLayout({
-  children
+  children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className="bg-slate-950">
+    <html lang="fr">
       <body
-        className={`${inter.variable} ${jetBrainsMono.variable} font-sans antialiased bg-slate-950 text-white`}
+        className={`${inter.variable} ${jetBrainsMono.variable} font-sans antialiased text-white`}
       >
         {children}
         <Toaster />

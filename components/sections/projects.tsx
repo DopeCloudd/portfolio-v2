@@ -65,6 +65,7 @@ export function ProjectsSection() {
       eyebrow="Réalisations"
       title="Des projets pensés pour délivrer des résultats mesurables"
       description="Chaque collaboration vise un impact concret : conversion, automatisation ou gain de temps pour vos équipes."
+      variant="muted"
     >
       <div className="grid gap-6 md:grid-cols-2">
         {projects.map((project, index) => (

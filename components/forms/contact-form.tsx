@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
@@ -11,12 +11,13 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import { contactSchema, type ContactFormData } from "@/lib/validation";
+import Link from "next/link";
 
 export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -26,8 +27,8 @@ export function ContactForm() {
     defaultValues: {
       name: "",
       email: "",
-      message: ""
-    }
+      message: "",
+    },
   });
 
   const onSubmit = form.handleSubmit(async (values) => {
@@ -36,7 +37,7 @@ export function ContactForm() {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values)
+        body: JSON.stringify(values),
       });
 
       const payload = await response.json();
@@ -48,7 +49,7 @@ export function ContactForm() {
       form.reset();
       toast({
         title: "Message envoyé",
-        description: "Je reviens vers vous sous 24 heures ouvrées."
+        description: "Je reviens vers vous sous 24 heures ouvrées.",
       });
     } catch (error) {
       toast({
@@ -57,7 +58,7 @@ export function ContactForm() {
           error instanceof Error
             ? error.message
             : "Merci de réessayer ou d'envoyer un email direct.",
-        variant: "destructive"
+        variant: "destructive",
       });
     } finally {
       setIsSubmitting(false);
@@ -87,7 +88,11 @@ export function ContactForm() {
             <FormItem>
               <FormLabel>Email*</FormLabel>
               <FormControl>
-                <Input placeholder="vous@entreprise.fr" type="email" {...field} />
+                <Input
+                  placeholder="vous@entreprise.fr"
+                  type="email"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -106,8 +111,21 @@ export function ContactForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" disabled={isSubmitting} className="justify-center">
-          {isSubmitting ? "Envoi en cours..." : "Vous avez un projet ? Parlons-en"}
+        <Button
+          type="submit"
+          disabled={isSubmitting}
+          className="justify-center"
+        >
+          {isSubmitting ? "Envoi en cours..." : "Envoyer ma demande"}
+        </Button>
+        <Button asChild className="hidden md:inline-flex" variant="secondary">
+          <Link
+            href="https://calendly.com/welance-mail/parlez-nous-de-votre-projet"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Pas le temps d&apos;écrire ? Réservez un créneau en 1 clic
+          </Link>
         </Button>
       </form>
     </Form>

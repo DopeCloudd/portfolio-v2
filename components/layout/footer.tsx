@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="mt-24 border-t border-white/10 bg-black/40">
+    <footer className="border-t border-white/10 bg-gradient-to-b from-[#050c1c]/60 via-[#010516] to-[#00040c] backdrop-blur-xl">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 py-12 md:flex-row md:items-center md:justify-between">
         <div className="space-y-2 text-sm text-white/70">
           <p className="text-base font-semibold text-white">Valentin LEROUGE</p>
@@ -59,7 +59,14 @@ export function Footer() {
       </div>
       <div className="border-t border-white/5 py-6 text-center text-xs text-white/50">
         © {new Date().getFullYear()} Valentin LEROUGE — Tous droits réservés.
-        Fait avec ❤️ à Montpellier.
+        Fait avec ❤️ à Montpellier.{" "}
+        <Link href="/mentions-legales" className="hover:text-white">
+          Mentions légales
+        </Link>
+        {" • "}
+        <Link href="/politique-de-confidentialite" className="hover:text-white">
+          Politique de confidentialité
+        </Link>
       </div>
     </footer>
   );

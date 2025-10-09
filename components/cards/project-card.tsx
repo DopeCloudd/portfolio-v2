@@ -43,7 +43,7 @@ export function ProjectCard({
       transition={{ duration: 0.45 }}
       className="h-full"
     >
-      <Card className="h-full border border-white/10 bg-white/[0.04] backdrop-blur">
+      <Card className="h-full border-white/15 bg-white/[0.06] backdrop-blur-xl">
         <CardHeader>
           <div className="flex flex-wrap items-center gap-3">
             <h3 className="bg-gradient-to-r from-white via-sky-100 to-blue-200 bg-clip-text text-xl font-semibold text-transparent">

@@ -30,6 +30,7 @@ export function TestimonialsSection() {
       eyebrow="Ils me font confiance"
       title="Des clients accompagnés avec transparence et exigence"
       description="Chaque projet est mené avec un suivi régulier, des livrables testés et une communication claire."
+      variant="surface"
     >
       <div className="grid gap-6 md:grid-cols-3">
         {testimonials.map((testimonial, index) => (
@@ -40,7 +41,7 @@ export function TestimonialsSection() {
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.4, delay: index * 0.05 }}
           >
-            <Card className="h-full border border-white/10 bg-white/[0.04] p-6">
+            <Card className="h-full border-white/15 bg-white/[0.06] p-6 backdrop-blur-xl">
               <p className="text-lg leading-relaxed text-white/80">
                 “{testimonial.quote}”
               </p>
